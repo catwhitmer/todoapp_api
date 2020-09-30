@@ -36,6 +36,7 @@ class Api::V1::TodosController < ApplicationController
             render json: todo
         else
             render json: { errors: @todo.errors.full_messages}
+        end
     end
 
 
