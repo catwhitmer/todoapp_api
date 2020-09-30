@@ -29,10 +29,13 @@ class Api::V1::TodosController < ApplicationController
     end
 
     def destroy
-        todo = Todo.find(params["id"])
-        todo.destroy
-
-        render json: todo
+        todo = Todo.find(params[:id])
+        if @todo
+            @todo.destroy
+            
+            render json: todo
+        else
+            render json: { errors: @todo.errors.full_messages}
     end
 
 
