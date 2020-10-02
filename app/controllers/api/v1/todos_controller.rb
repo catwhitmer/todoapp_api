@@ -1,42 +1,35 @@
 class Api::V1::TodosController < ApplicationController
-    before_action :set_todo
 
     def index
-        @todos = Todo.all 
+        todos = Todo.all 
 
-        render json: @todos
-    end
-
-    def show
-        set_todo
-
-        render json: @todo
+        render json: todos
     end
 
     def create
-        @todo = Todo.new(todo_params)
-        if @todo.save
-            render json: @todo
+        todo = Todo.new(todo_params)
+        if todo.save
+            render json: todo
         else
-            render json: { errors: @todo.errors.full_messages}
+            render json: { errors: todo.errors.full_messages}
         end
     end
 
     def update
         set_todo
-        @todo.update(todo_params)
+        todo.update(todo_params)
 
-        render json: @todo
+        render json: todo
     end
 
     def destroy
         todo = Todo.find(params[:id])
-        if @todo
-            @todo.destroy
+        if todo
+            todo.destroy
             
             render json: todo
         else
-            render json: { errors: @todo.errors.full_messages}
+            render json: { errors: todo.errors.full_messages}
         end
     end
 
@@ -44,7 +37,7 @@ class Api::V1::TodosController < ApplicationController
     private
 
     def set_todo
-        @todo = Todo.find_by(id: params[:id])
+        todo = Todo.find_by(id: params[:id])
     end
 
     def todo_params
