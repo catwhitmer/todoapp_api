@@ -1,9 +1,7 @@
 class Api::V1::TodosController < ApplicationController
 
     def index
-        todos = Todo.all 
-
-        render json: todos
+        render json: Todo.all 
     end
 
     def create
