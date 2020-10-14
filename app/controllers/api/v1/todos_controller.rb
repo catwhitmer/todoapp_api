@@ -1,7 +1,8 @@
 class Api::V1::TodosController < ApplicationController
 
     def index
-        render json: Todo.all 
+        todos = Todo.order('created_at DESC')
+        render json: todos
     end
 
     def create
